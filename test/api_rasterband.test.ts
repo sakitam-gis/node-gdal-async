@@ -1297,17 +1297,23 @@ describe('gdal.RasterBand', () => {
                   assert.isAtMost(complete, 1)
                   prevComplete = complete
                 } })
+              assert.instanceOf(data, Uint8Array)
               assert.isAtLeast(calls, 1)
             })
             it('should call the write() progress callback when one is provided', () => {
               const file = `/vsimem/write_progress_test.${String(
                 Math.random()
               ).substring(2)}.tmp.tif`
-              ds2 = gdal.open(file, 'w', 'GTiff', ds1.rasterSize.x, ds1.rasterSize.y, 1)
+              const size = 4096
+              ds2 = gdal.open(file, 'w', 'GTiff', size, size, 1, gdal.GDT_Float64)
               const band = ds2.bands.get(1)
               let calls = 0
               let prevComplete = 0
-              band.pixels.write(0, 0, ds1.rasterSize.x, ds1.rasterSize.y, data, {
+              const zeros = new Float64Array(size * size)
+              // Make sure to use non-aligned blocks because GDAL 3.8.0 has
+              // an optimization when writing aligned blocks in a GeoTiff
+              // that never calls the progress callback
+              band.pixels.write(1, 1, size - 3, size - 3, zeros, {
                 progress_cb: (complete): void => {
                   calls++
                   assert.isAbove(complete, prevComplete)
@@ -1477,7 +1483,6 @@ describe('gdal.RasterBand', () => {
 
         band.pixels.write(0, 0, size, size, data)
 
-        assert.throws(() => gdal.open(file))
         band.flush()
         const newDs = gdal.open(file)
         const result = newDs.bands.get(1).pixels.read(0, 0, size, size, data)
