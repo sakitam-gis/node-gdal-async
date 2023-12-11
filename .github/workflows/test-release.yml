@@ -29,6 +29,9 @@ jobs:
             node-version: 18
           - linux-version: fedora:38
             node-version: 20
+        exclude:
+          - linux-version: centos:stream8
+            node-version: 21
 
     steps:
     - uses: actions/checkout@v3
