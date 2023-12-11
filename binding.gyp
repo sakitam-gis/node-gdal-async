@@ -189,7 +189,7 @@
 							"action_name": "yatag",
 							"inputs":  [ "<@(sources_node_gdal)", "lib/gdal.js" ],
 							"outputs": [ "lib/index.d.ts" ],
-							"action": [ "npm run yatag" ]
+							"action": [ 'cmd', '/c"npm run yatag"' ]
 						}
 					]
 				}],
