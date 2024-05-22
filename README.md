@@ -270,6 +270,27 @@ plugins: [
 
 You can check [XC-DB](https://github.com/mmomtchev/xc-db) for a working project that uses `gdal-async` with `Express` and is bundled for production with `rollup`.
 
+### Bundling with `Next.js`
+
+As `gdal-async` is a Node.js native module, it does not work in client side components which run in the client browser. You can however use it in server side components, if you can ensure that this code will never get called on the client side.
+
+Add this to your `next.config.js`:
+
+```js
+/** @type {import('next').NextConfig} */
+
+export default {
+  webpack: (config) => {
+    const externals = ['gdal-async'];
+    if (config.externals)
+      config.externals.push(...externals);
+    else
+      config.externals = externals;
+    return config;
+  }
+};
+```
+
 ## Known issues
 
 * [#2](https://github.com/mmomtchev/node-gdal-async/issues/2) When running multiple parallel async operations per `Dataset` and on multiple `Dataset`s, thread starvation is possible as explained in [`ASYNCIO.md`](https://github.com/mmomtchev/node-gdal-async/blob/master/ASYNCIO.md)
