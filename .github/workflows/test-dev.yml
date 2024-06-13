@@ -60,7 +60,7 @@ jobs:
 
     strategy:
       matrix:
-        linux-version: [ 'ubuntu:22.04', 'ubuntu:20.04', 'debian:bullseye', 'fedora:37', 'centos:stream8' ]
+        linux-version: [ 'ubuntu:22.04', 'ubuntu:20.04', 'debian:bullseye', 'fedora:37', 'centos:stream9' ]
 
     steps:
     - uses: actions/checkout@v4
@@ -73,7 +73,7 @@ jobs:
       with:
         max-size: 1000M
         key: distros-shared-${{ matrix.linux-version }}
-    - run: npm run container dev ${{ matrix.linux-version }} 16 shared
+    - run: npm run container dev ${{ matrix.linux-version }} 20 shared
       env:
         MOCHA_TEST_NETWORK: ${{ github.event.inputs.testNetwork }}
 
