@@ -41,6 +41,7 @@
           "/MP", # compile across multiple CPUs
           "/GR", # force RTTI on (see https://github.com/nodejs/node-gyp/issues/2412)
           "/EHsc" # same for ExceptionHandling
+          "/permissive" # for the new MSVC in Github Actions, mostly related to const char to char conversions
         ],
         "ExceptionHandling": 1,
         "RuntimeTypeInfo": "true"
