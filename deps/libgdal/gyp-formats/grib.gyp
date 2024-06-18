@@ -6,7 +6,7 @@
 		{
 			"target_name": "libgdal_grib_frmt",
 			"type": "static_library",
-      "defines": [ "USE_PNG" ],
+			"defines": [ "USE_PNG" ],
 			"sources": [
 				"../gdal/frmts/grib/degrib/g2clib/pngunpack.c",
 				"../gdal/frmts/grib/degrib/g2clib/dec_png.c",
@@ -55,7 +55,8 @@
 				"../gdal/frmts/grib/degrib/degrib/hazard.c",
 				"../gdal/frmts/grib/degrib/degrib/metaname.cpp",
 				"../gdal/frmts/grib/gribdataset.cpp",
-				"../gdal/frmts/grib/gribcreatecopy.cpp"
+				"../gdal/frmts/grib/gribcreatecopy.cpp",
+				"../gdal/frmts/grib/gribdrivercore.cpp"
 			],
 			"include_dirs": [
 				"../gdal/frmts/grib",
