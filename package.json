@@ -91,7 +91,7 @@
     "xmlbuilder2": "^3.0.2",
     "yatag": "^1.2.0"
   },
-  "bundledDependencies": [
+  "bundleDependencies": [
     "@mapbox/node-pre-gyp"
   ],
   "devDependencies": {
