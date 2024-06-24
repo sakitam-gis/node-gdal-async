@@ -7,11 +7,11 @@ import { Octokit } from '@octokit/core'
 const exec = promisify(child_process.exec)
 const octokit = new Octokit({ auth: process.env.NODE_PRE_GYP_GITHUB_TOKEN })
 const pkg = { repo: 'node-gdal-async', owner: 'mmomtchev' }
-const version = JSON.parse(await fs.readFile(path.resolve(path.dirname(fileURLToPath(import.meta.url)),  '..', 'package.json'))).version
+const version = JSON.parse(await fs.readFile(path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', 'package.json'))).version
 const workflowPublishId = 7048427
 const workflowPublish = { ...pkg, workflow_id: workflowPublishId, ref: `v${version}` }
 
-(async () => {
+try {
   const branch = (await exec('git branch --show-current')).stdout.trim()
   process.stdout.write(`launching Github actions build on branch ${branch} for ${version}, tag ${workflowPublish.ref}`)
   await octokit.request('POST /repos/{owner}/{repo}/actions/workflows/{workflow_id}/dispatches', workflowPublish)
@@ -42,7 +42,7 @@ const workflowPublish = { ...pkg, workflow_id: workflowPublishId, ref: `v${versi
     throw new Error('Github actions build failed')
   }
   process.stdout.write('success')
-})().catch((e) => {
+} catch (e) {
   console.error(e)
   process.exit(1)
-})
+}

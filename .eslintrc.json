@@ -190,7 +190,6 @@
     },
     {
       "files": [
-        "scripts/publish-packages.js",
         "test/stress.js",
         "lib/readable.js",
         "lib/writable.js",
@@ -200,6 +199,15 @@
       ],
       "parserOptions": {
         "ecmaVersion": 2018
+      }
+    },
+    {
+      "files": [
+        "*.mjs"
+      ],
+      "parserOptions": {
+        "ecmaVersion": 2023,
+        "sourceType": "module"
       }
     },
     {
