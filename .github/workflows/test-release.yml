@@ -22,8 +22,10 @@ jobs:
         - debian:bullseye
         - centos:stream9
         - amazonlinux:2022
-        node-version: [ 16, 18, 20, 22 ]
+        node-version: [ 18, 20, 22 ]
         include:
+          - linux-version: ubuntu:22.04
+            node-version: 16
           - linux-version: fedora:36
             node-version: 18
           - linux-version: fedora:37
