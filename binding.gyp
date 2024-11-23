@@ -111,7 +111,7 @@
 			"include_dirs": [
 				"include",
 				"<!(node -e \"require('nan')\")",
-				"/usr/include/webp"
+				"deps/libwebp/webp/src"
 			],
 			"defines": [
 				"PLATFORM='<(OS)'",
