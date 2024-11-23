@@ -110,12 +110,14 @@
 			"sources": [ "<@(sources_node_gdal)" ],
 			"include_dirs": [
 				"include",
-				"<!(node -e \"require('nan')\")"
+				"<!(node -e \"require('nan')\")",
+				"/usr/include/webp"
 			],
 			"defines": [
 				"PLATFORM='<(OS)'",
 				"_LARGEFILE_SOURCE",
-				"_FILE_OFFSET_BITS=64"
+				"_FILE_OFFSET_BITS=64",
+				"HAVE_WEBP"
 			],
 			"xcode_settings": {
 				"GCC_ENABLE_CPP_EXCEPTIONS": "YES"
@@ -132,7 +134,8 @@
 					],
 					"dependencies": [
 						"deps/libgdal/libgdal.gyp:libgdal",
-						"deps/libproj/libproj.gyp:libproj"
+						"deps/libproj/libproj.gyp:libproj",
+						"deps/libwebp/libwebp.gyp:libwebp"
 					]
 				}, {
 					"conditions": [

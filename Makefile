@@ -25,6 +25,8 @@ clean-test:
 	npm install @mapbox/node-pre-gyp
 
 build: ./node_modules/.bin/node-pre-gyp
+	chmod +x deps/libwebp.sh
+	./deps/libwebp.sh
 	./node_modules/.bin/node-pre-gyp configure --silent
 	./node_modules/.bin/node-pre-gyp build -j max
 
