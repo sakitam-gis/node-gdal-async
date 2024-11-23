@@ -1,5 +1,5 @@
 {
-  "name": "gdal-async",
+  "name": "@sakitam-gis/gdal-async",
   "version": "3.9.2",
   "description": "Bindings to GDAL (Geospatial Data Abstraction Library) with full async support",
   "license": "Apache-2.0",
