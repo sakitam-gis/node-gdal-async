@@ -2,6 +2,7 @@ import * as gdal from 'gdal-async'
 import * as chai from 'chai'
 const assert: Chai.Assert = chai.assert
 import * as chaiAsPromised from 'chai-as-promised'
+import { runGC } from './_hooks'
 chai.use(chaiAsPromised)
 
 // https://magosm.magellium.com/aide.html © Magellium pour les flux WMS/WFS
@@ -9,7 +10,7 @@ chai.use(chaiAsPromised)
 const magosm = 'https://magosm.magellium.com/geoserver/ows?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=magosm%3Afrance_telecom_fibre_connection_point&CRS=CRS:84&BBOX=2,48,3,49'
 
 describe('Open', () => {
-  afterEach(global.gc!)
+  afterEach(runGC)
 
   describe('WMS w/Net', () => {
     let ds: gdal.Dataset

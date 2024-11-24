@@ -2,9 +2,10 @@ import { assert } from 'chai'
 import * as semver from 'semver'
 import * as gdal from 'gdal-async'
 import * as fileUtils from './utils/file'
+import { runGC } from './_hooks'
 
 describe('gdal.RasterBand', () => {
-  afterEach(global.gc!)
+  afterEach(runGC)
 
   it('should not be instantiable', () => {
     assert.throws(() => {

@@ -2,9 +2,10 @@ import * as gdal from 'gdal-async'
 import * as path from 'path'
 import { assert } from 'chai'
 import * as semver from 'semver'
+import { runGC } from './_hooks'
 
 describe('Open', () => {
-  afterEach(global.gc!)
+  afterEach(runGC)
 
   describe('OpenFileGDB', () => {
     let filename, ds: gdal.Dataset

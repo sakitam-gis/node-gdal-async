@@ -1,8 +1,9 @@
 import * as gdal from 'gdal-async'
 import { assert } from 'chai'
+import { runGC } from './_hooks'
 
 describe('gdal.LineString', () => {
-  afterEach(global.gc!)
+  afterEach(runGC)
 
   it('should be instantiable', () => {
     new gdal.LineString()

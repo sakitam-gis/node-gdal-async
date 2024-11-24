@@ -5,12 +5,13 @@ import * as chai from 'chai'
 const assert: Chai.Assert = chai.assert
 chai.use(chaiAsPromised)
 import * as semver from 'semver'
+import { runGC } from './_hooks'
 
 // http://epsg.io/
 // http://spatialreference.org/ref/
 
 describe('gdal.SpatialReference', () => {
-  afterEach(global.gc!)
+  afterEach(runGC)
 
   it('should be exposed', () => {
     assert.ok(gdal.SpatialReference)

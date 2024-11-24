@@ -3,11 +3,12 @@ import * as chai from 'chai'
 const assert: Chai.Assert = chai.assert
 import * as gdal from 'gdal-async'
 import * as semver from 'semver'
+import { runGC } from './_hooks'
 
 chai.use(chaiAsPromised)
 
 describe('gdal.RasterBandAsync', () => {
-  afterEach(global.gc!)
+  afterEach(runGC)
 
   it('should not be instantiable', () => {
     assert.throws(() => {

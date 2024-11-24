@@ -1,9 +1,10 @@
 import * as gdal from 'gdal-async'
 import { assert } from 'chai'
 import * as path from 'path'
+import { runGC } from './_hooks'
 
 describe('gdal.Feature', () => {
-  afterEach(global.gc!)
+  afterEach(runGC)
 
   let ds: gdal.Dataset, lyr: gdal.Layer, defn: gdal.FeatureDefn, fields: gdal.FieldDefn[]
   before(() => {

@@ -2,10 +2,11 @@ import * as gdal from 'gdal-async'
 import * as chai from 'chai'
 const assert: Chai.Assert = chai.assert
 import * as chaiAsPromised from 'chai-as-promised'
+import { runGC } from './_hooks'
 chai.use(chaiAsPromised)
 
 describe('Open', () => {
-  afterEach(global.gc!)
+  afterEach(runGC)
 
   describe('vsicurl w/Net', () => {
     let ds: gdal.Dataset

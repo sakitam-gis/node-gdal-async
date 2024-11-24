@@ -5,9 +5,10 @@ const assert: Chai.Assert = chai.assert
 chai.use(chaiAsPromised)
 import * as path from 'path'
 import * as semver from 'semver'
+import { runGC } from './_hooks'
 
 describe('gdal_utils', () => {
-  afterEach(global.gc!)
+  afterEach(runGC)
 
   describe('translate', () => {
     it('should be equivalent to gdal_translate', () => {

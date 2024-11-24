@@ -4,6 +4,7 @@ import * as chai from 'chai'
 import * as semver from 'semver'
 const assert: Chai.Assert = chai.assert
 import * as chaiAsPromised from 'chai-as-promised'
+import { runGC } from './_hooks'
 chai.use(chaiAsPromised)
 
 describe('Open', () => {
@@ -11,7 +12,7 @@ describe('Open', () => {
     return
   }
 
-  afterEach(global.gc!)
+  afterEach(runGC)
 
   describe('JSONFG', () => {
     let ds: gdal.Dataset

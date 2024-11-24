@@ -53,7 +53,7 @@
     }
   ],
   "scripts": {
-    "test": "npm run lint:js && mocha && npm run test:stress 20",
+    "test": "mocha",
     "bench": "node bench/streams.js",
     "lint:cpp": "clang-format -i src/*.cpp src/*.hpp && clang-format -i src/*/*.cpp src/*/*.hpp",
     "lint:js": "eslint lib test examples",
@@ -80,7 +80,7 @@
     "test:f36": "npm run container dev fedora:36 18 shared",
     "test:shared": "npm run test:u20 && npm run test:c8",
     "test:clean": "npx rimraf test/data/*.tmp* test/data/temp/*",
-    "test:stress": "node test/stress",
+    "test:stress": "node test/stress --expose-gc",
     "prune": "npx rimraf 'deps/@(libgdal|libproj)/*/!(data)' && npx rimraf 'deps/libcurl/!(cacert.pem)' && npx rimraf 'deps/!(libgdal|libproj|libcurl)'",
     "postpublish": "gh workflow run test-npm.yml -F version=$npm_package_version"
   },

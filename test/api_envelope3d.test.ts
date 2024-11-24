@@ -1,9 +1,10 @@
 /* eslint no-new: 0 */
 import { assert } from 'chai'
 import * as gdal from 'gdal-async'
+import { runGC } from './_hooks'
 
 describe('gdal.Envelope3D', () => {
-  afterEach(global.gc!)
+  afterEach(runGC)
 
   it('should be instantiable', () => {
     new gdal.Envelope3D()

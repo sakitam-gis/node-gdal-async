@@ -1,8 +1,9 @@
 import { assert } from 'chai'
 import * as gdal from 'gdal-async'
+import { runGC } from './_hooks'
 
 describe('gdal.CompoundCurve', () => {
-  afterEach(global.gc!)
+  afterEach(runGC)
 
   it('should be instantiable', () => {
     new gdal.CompoundCurve()
@@ -91,7 +92,7 @@ describe('gdal.CompoundCurve', () => {
 })
 
 describe('gdal.MultiCurve', () => {
-  afterEach(global.gc!)
+  afterEach(runGC)
 
   it('should be instantiable', () => {
     new gdal.MultiCurve()
