@@ -107,17 +107,20 @@
 			"win_delay_load_hook": "false",
 			"product_prefix": "",
 			"product_extension": "node",
-			"sources": [ "<@(sources_node_gdal)" ],
+			"sources": [
+        "<@(sources_node_gdal)",
+        "deps/libgdal/gdal/frmts/webp/webpdataset.cpp"
+      ],
 			"include_dirs": [
 				"include",
-				"<!(node -e \"require('nan')\")",
-				"deps/libwebp/libwebp/src"
+				"<!(node -e \"require('nan')\")"
 			],
 			"defines": [
 				"PLATFORM='<(OS)'",
 				"_LARGEFILE_SOURCE",
 				"_FILE_OFFSET_BITS=64",
-				"HAVE_WEBP"
+				"HAVE_WEBP",
+        "FRMT_webp"
 			],
 			"xcode_settings": {
 				"GCC_ENABLE_CPP_EXCEPTIONS": "YES"

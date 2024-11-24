@@ -4387,3 +4387,7 @@ GDALRasterAttributeTable CPL_DLL *GDALCreateRasterAttributeTableFromMDArrays(
 //! @endcond
 
 #endif /* ndef GDAL_PRIV_H_INCLUDED */
+
+#ifdef HAVE_WEBP
+void GDALRegisterWEBP();
+#endif

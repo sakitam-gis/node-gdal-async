@@ -8,7 +8,6 @@
 
 // gdal
 #include <gdal.h>
-#include <gdal_priv.h>
 
 // node-gdal
 #include "gdal_algorithms.hpp"
@@ -73,10 +72,6 @@
 #include <sstream>
 #include <string>
 #include <vector>
-
-// WebP
-#include "webp/encode.h" // WebP 头文件
-#include "webp/decode.h"
 
 namespace node_gdal {
 
@@ -1794,16 +1789,15 @@ static void Init(Local<Object> target, Local<v8::Value>, void *) {
   NODE_DEFINE_CONSTANT(target, CPLE_NoWriteAccess);
   NODE_DEFINE_CONSTANT(target, CPLE_UserInterrupt);
 
+#ifdef HAVE_WEBP
+  GDALRegisterWEBP();
+  // 添加 WebP 相关常量
+  Nan::Set(target, Nan::New("DMD_WEBP_LOSSLESS").ToLocalChecked(), Nan::New("WEBP_LOSSLESS").ToLocalChecked());
+  Nan::Set(target, Nan::New("DMD_WEBP_QUALITY").ToLocalChecked(), Nan::New("WEBP_QUALITY").ToLocalChecked());
+#endif
+
   auto *env = GetCurrentEnvironment(target->GetIsolate()->GetCurrentContext());
   AtExit(env, Cleanup, nullptr);
-
-  GDALRegister_WEBP();  // 注册 WebP 驱动
-
-  // 添加 WebP 相关常量
-  Nan::Set(target, Nan::New("DMD_WEBP_LOSSLESS").ToLocalChecked(),
-           Nan::New("WEBP_LOSSLESS").ToLocalChecked());
-  Nan::Set(target, Nan::New("DMD_WEBP_QUALITY").ToLocalChecked(),
-           Nan::New("WEBP_QUALITY").ToLocalChecked());
 }
 }
 

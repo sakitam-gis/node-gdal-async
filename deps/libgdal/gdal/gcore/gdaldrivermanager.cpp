@@ -62,6 +62,10 @@
 #endif
 #endif
 
+#ifdef FRMT_webp
+RegisterOGRWEBP();
+#endif
+
 // FIXME: Disabled following code as it crashed on OSX CI test.
 // #include <mutex>
 
