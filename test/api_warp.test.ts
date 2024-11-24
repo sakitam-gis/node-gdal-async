@@ -1,9 +1,10 @@
 import * as gdal from 'gdal-async'
 import { assert } from 'chai'
 import * as semver from 'semver'
+import { runGC } from './_hooks'
 
 describe('gdal', () => {
-  afterEach(() => void global.gc!())
+  afterEach(runGC)
 
   describe('suggestedWarpOutput()', () => {
     let src: gdal.Dataset

@@ -7,6 +7,7 @@ import * as fileUtils from './utils/file'
 import * as chai from 'chai'
 import * as chaiAsPromised from 'chai-as-promised'
 import * as semver from 'semver'
+import { runGC } from './_hooks'
 chai.use(chaiAsPromised)
 
 const NAD83_WKT =
@@ -20,7 +21,7 @@ const NAD83_WKT =
   'UNIT["Meter",1.0]]'
 
 describe('gdal.Dataset', () => {
-  afterEach(() => void global.gc!())
+  afterEach(runGC)
 
   let ds: gdal.Dataset
   before(() => {

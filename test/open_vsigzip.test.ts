@@ -3,10 +3,11 @@ import * as path from 'path'
 import * as chai from 'chai'
 const assert: Chai.Assert = chai.assert
 import * as chaiAsPromised from 'chai-as-promised'
+import { runGC } from './_hooks'
 chai.use(chaiAsPromised)
 
 describe('Open', () => {
-  afterEach(() => void global.gc!())
+  afterEach(runGC)
 
   describe('vsigzip', () => {
     let filename, ds: gdal.Dataset

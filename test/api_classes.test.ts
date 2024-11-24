@@ -2,6 +2,7 @@ import { assert } from 'chai'
 import * as semver from 'semver'
 import * as path from 'path'
 import * as gdal from 'gdal-async'
+import { runGC } from './_hooks'
 
 // create = function -> class cannot be directly instantiated
 // create = array -> these are the arguments for the new
@@ -58,7 +59,7 @@ const create31 = {
 }
 
 describe('Class semantics', () => {
-  afterEach(() => void global.gc!())
+  afterEach(runGC)
 
   const klasses = create
   if (semver.gte(gdal.version, '3.1.0')) {

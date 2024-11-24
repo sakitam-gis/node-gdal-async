@@ -46,10 +46,14 @@ const bundledSkip = function (this: Mocha.Context) {
   }
 }
 
+export function runGC() {
+  if (global.gc) global.gc()
+}
+
 const cleanup = () => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   delete (gdal as any).drivers
-  global.gc!()
+  runGC()
 }
 
 exports.mochaHooks = {

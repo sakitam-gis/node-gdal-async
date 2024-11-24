@@ -1,8 +1,9 @@
 import * as gdal from 'gdal-async'
 import { assert } from 'chai'
+import { runGC } from './_hooks'
 
 describe('gdal.CoordinateTransformation', () => {
-  afterEach(() => void global.gc!())
+  afterEach(runGC)
 
   it('should be exposed', () => {
     assert.ok(gdal.CoordinateTransformation)

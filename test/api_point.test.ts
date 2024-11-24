@@ -1,8 +1,9 @@
 import * as gdal from 'gdal-async'
 import { assert } from 'chai'
+import { runGC } from './_hooks'
 
 describe('gdal.Point', () => {
-  afterEach(() => void global.gc!())
+  afterEach(runGC)
 
   let point2d: gdal.Point
   let point3d: gdal.Point

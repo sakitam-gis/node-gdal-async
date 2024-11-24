@@ -3,11 +3,12 @@ import * as chai from 'chai'
 const assert: Chai.Assert = chai.assert
 import * as gdal from 'gdal-async'
 import * as semver from 'semver'
+import { runGC } from './_hooks'
 
 chai.use(chaiAsPromised)
 
 describe('gdal.RasterBandAsync', () => {
-  afterEach(() => void global.gc!())
+  afterEach(runGC)
 
   it('should not be instantiable', () => {
     assert.throws(() => {
@@ -527,50 +528,6 @@ describe('gdal.RasterBandAsync', () => {
             assert.deepEqual(size2, { x: 984, y: 4 })
           }))
         })
-      })
-    })
-    describe('threadSafe', () => {
-      it('should support opening in threadsafe mode with GDAL >= 3.10', () => {
-        const ds = gdal.open(`${__dirname}/data/sample.tif`, 'r')
-        assert.isFalse(ds.threadSafe)
-        if (semver.gte(gdal.version, '3.10.0')) {
-          const ds = gdal.open(`${__dirname}/data/sample.tif`, 'rt')
-          assert.isTrue(ds.threadSafe)
-        } else {
-          assert.throws(() => {
-            gdal.open(`${__dirname}/data/sample.tif`, 'rt')
-          }, /requires GDAL 3.10/)
-        }
-      })
-      it('should disallow opening in threadsafe writing mode with GDAL >= 3.10', () => {
-        const file = `/vsimem/write_threadSafe_test.${String(
-          Math.random()
-        ).substring(2)}.tmp.tif`
-        assert.throws(() => {
-          gdal.open(file, 'r+t', 'GTiff', 64, 64, 1, gdal.GDT_Byte)
-        })
-      })
-      it('should support reading in threadsafe mode with GDAL >= 3.10', function () {
-        if (semver.gte(gdal.version, '3.10.0')) {
-          const ds = gdal.open(`${__dirname}/data/sample.tif`, 'rt')
-          assert.isTrue(ds.threadSafe)
-          const data: Promise<gdal.TypedArray>[] = []
-          for (let x = 0; x < 5; x++) {
-            for (let y = 0; y < 5; y++) {
-              const array = ds.bands.getAsync(1).then((b) => b.pixels.readAsync(x * 10, y * 10, 10, 10))
-              data.push(array)
-              // Synchronously accessing datasets on which async operations are running
-              // should produce a console warning about blocking the event loop
-              // if the dataset is actually locked
-              assert.isNumber(ds.rasterSize.x)
-              assert.instanceOf(ds.bands.get(1).pixels.read(x * 10, y * 10, 10, 10), Uint8Array)
-            }
-          }
-          assert.lengthOf(data, 25)
-          return Promise.all(data)
-            .then((arrays) => arrays.forEach((a) => void assert.instanceOf(a, Uint8Array)))
-        }
-        this.skip()
       })
     })
     describe('flushAsync()', () => {

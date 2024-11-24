@@ -1,9 +1,10 @@
 import * as gdal from 'gdal-async'
 import * as path from 'path'
 import { assert } from 'chai'
+import { runGC } from './_hooks'
 
 describe('Open', () => {
-  afterEach(() => void global.gc!())
+  afterEach(runGC)
 
   describe('GPX', () => {
     let filename, ds: gdal.Dataset

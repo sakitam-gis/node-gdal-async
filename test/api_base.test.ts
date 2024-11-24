@@ -3,6 +3,7 @@ import { assert } from 'chai'
 import * as path from 'path'
 import * as fs from 'fs'
 import * as cp from 'child_process'
+import { runGC } from './_hooks'
 
 if (process.env.GDAL_DATA !== undefined) {
   throw new Error(
@@ -11,7 +12,7 @@ if (process.env.GDAL_DATA !== undefined) {
 }
 
 describe('gdal', () => {
-  afterEach(() => void global.gc!())
+  afterEach(runGC)
 
   describe('"lastError" property', () => {
     describe('get()', () => {

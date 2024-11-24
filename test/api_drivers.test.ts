@@ -2,11 +2,12 @@ import * as chaiAsPromised from 'chai-as-promised'
 import * as chai from 'chai'
 const assert: Chai.Assert = chai.assert
 import * as gdal from 'gdal-async'
+import { runGC } from './_hooks'
 
 chai.use(chaiAsPromised)
 
 describe('gdal.drivers', () => {
-  afterEach(() => void global.gc!())
+  afterEach(runGC)
 
   describe('count()', () => {
     it('should return the number of drivers', () => {

@@ -4,11 +4,12 @@ const assert: Chai.Assert = chai.assert
 import * as gdal from 'gdal-async'
 import * as fileUtils from './utils/file'
 import * as semver from 'semver'
+import { runGC } from './_hooks'
 
 chai.use(chaiAsPromised)
 
 describe('gdal.LayerAsync', () => {
-  afterEach(() => void global.gc!())
+  afterEach(runGC)
 
   describe('instance', () => {
     const cleanupWrite = (ds: gdal.Dataset, file: string) => {

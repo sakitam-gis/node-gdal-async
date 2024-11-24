@@ -1,9 +1,10 @@
 import { assert } from 'chai'
 import * as path from 'path'
 import * as gdal from 'gdal-async'
+import { runGC } from './_hooks'
 
 describe('gdal.Polygon', () => {
-  afterEach(() => void global.gc!())
+  afterEach(runGC)
 
   it('should be instantiable', () => {
     new gdal.Polygon()
@@ -219,7 +220,7 @@ describe('gdal.Polygon', () => {
 })
 
 describe('gdal.MultiPolygon', () => {
-  afterEach(() => void global.gc!())
+  afterEach(runGC)
   let multiPolygon: gdal.MultiPolygon
 
   beforeEach(() => {

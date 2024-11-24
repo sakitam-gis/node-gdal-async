@@ -2,12 +2,13 @@ import * as gdal from 'gdal-async'
 import * as chai from 'chai'
 import * as path from 'path'
 import * as semver from 'semver'
+import { runGC } from './_hooks'
 const assert: Chai.Assert = chai.assert
 import * as chaiAsPromised from 'chai-as-promised'
 chai.use(chaiAsPromised)
 
 describe('gdal', () => {
-  afterEach(() => void global.gc!())
+  afterEach(runGC)
 
   describe('contourGenerate()', () => {
     let src: gdal.Dataset, srcband: gdal.RasterBand, dst: gdal.Dataset, lyr: gdal.Layer

@@ -4,9 +4,10 @@ import * as chai from 'chai'
 const assert: Chai.Assert = chai.assert
 chai.use(chaiAsPromised)
 import * as semver from 'semver'
+import { runGC } from './_hooks'
 
 describe('gdal', () => {
-  afterEach(() => void global.gc!())
+  afterEach(runGC)
 
   describe('suggestedWarpOutputAsync()', () => {
     let src: gdal.Dataset

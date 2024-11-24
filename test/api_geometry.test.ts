@@ -6,12 +6,13 @@ import * as path from 'path'
 const assert: Chai.Assert = chai.assert
 chai.use(chaiAsPromised)
 import * as semver from 'semver'
+import { runGC } from './_hooks'
 
 const WGS84 =
   'GEOGCS["WGS_84",DATUM["WGS_1984",SPHEROID["WGS_84",6378137,298.257223563]],PRIMEM["Greenwich",0],UNIT["Degree",0.0174532925199433],AXIS["Longitude",EAST],AXIS["Latitude",NORTH]]'
 
 describe('gdal.Geometry', () => {
-  afterEach(() => void global.gc!())
+  afterEach(runGC)
 
   describe('toJSON()', () => {
     it('should return valid result', () => {
