@@ -15,3 +15,8 @@ if [[ ! -f libwebp-${WEBP_VERSION}.tar.gz ]]; then
 fi
 tar -xzf libwebp-${WEBP_VERSION}.tar.gz
 mv libwebp-${WEBP_VERSION} $dir_webp
+
+(
+  cd $dir_webp
+  ./configure
+)
