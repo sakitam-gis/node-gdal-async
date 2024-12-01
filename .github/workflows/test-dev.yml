@@ -61,6 +61,7 @@ jobs:
     runs-on: ubuntu-latest
 
     strategy:
+      fail-fast: false
       matrix:
         linux-version:
           - ubuntu:20.04
@@ -91,6 +92,7 @@ jobs:
     runs-on: ubuntu-latest
 
     strategy:
+      fail-fast: false
       matrix:
         linux-version: [ 'amazonlinux:2022', 'ubuntu:24.04' ]
 
@@ -115,8 +117,9 @@ jobs:
     runs-on: ubuntu-latest
 
     strategy:
+      fail-fast: false
       matrix:
-        node-version: [ 16, 18, 20, 22 ]
+        node-version: [ 18, 20, 22, 23 ]
         gdal-version: [ 'shared', 'bundled' ]
 
     steps:
@@ -150,18 +153,19 @@ jobs:
       with:
         max-size: 1000M
         key: asan
-    - run: npm run container asan ubuntu:20.04 16 bundled
+    - run: npm run container asan ubuntu:20.04 18 bundled
       env:
         MOCHA_TEST_NETWORK: ${{ github.event.inputs.testNetwork }}
 
 
   test_mac:
 
-    runs-on: macos-12
+    runs-on: macos-13
 
     strategy:
+      fail-fast: false
       matrix:
-        node-version: [ 16.x, 18.x, 20.x, 22.x ]
+        node-version: [ 18.x, 20.x, 22.x, 23.x ]
 
     steps:
     - uses: actions/checkout@v4
@@ -194,7 +198,7 @@ jobs:
 
   test_mac_debug:
 
-    runs-on: macos-12
+    runs-on: macos-13
 
     steps:
     - uses: actions/checkout@v4
@@ -230,8 +234,9 @@ jobs:
     runs-on: windows-2019
 
     strategy:
+      fail-fast: false
       matrix:
-        node-version: [ 16.x, 18.x, 20.x, 22.x ]
+        node-version: [ 18.x, 20.x, 22.x, 23.x ]
 
     steps:
     - uses: actions/checkout@v4
