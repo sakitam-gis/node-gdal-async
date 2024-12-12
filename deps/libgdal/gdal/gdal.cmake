@@ -288,6 +288,11 @@ if (GDAL_USE_JPEG12_INTERNAL)
   add_subdirectory(frmts/jpeg/libjpeg12)
 endif ()
 
+# WebP options
+if (GDAL_USE_WEBP)
+  add_subdirectory(frmts/webp)
+endif ()
+
 # Lerc options need to be defined before internal libtiff
 if (GDAL_USE_LERC_INTERNAL)
   # Internal liblerc uses a dedicated namespace

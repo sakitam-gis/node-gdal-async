@@ -209,6 +209,15 @@
 /* Define to 1 if you have the `getaddrinfo' function. */
 #define HAVE_GETADDRINFO 1
 
+/* Define to 1 if you have the <webp/decode.h> header file. */
+#define HAVE_WEBP_DECODE_H 1
+
+/* Define to 1 if you have the <webp/encode.h> header file. */
+#define HAVE_WEBP_ENCODE_H 1
+
+/* Define to 1 if you have the WebP library. */
+#define HAVE_WEBP 1
+
 /* Use this file to override settings in instances where you're doing FAT compiles
    on Apple.  It is currently off by default because it doesn't seem to work with
    newish ( XCode >= 3/28/11) XCodes */
